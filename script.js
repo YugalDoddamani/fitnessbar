@@ -134,6 +134,7 @@
     btn.textContent = DAYS[d];
     btn.dataset.day = d;
     btn.setAttribute("role", "tab");
+    btn.setAttribute("aria-selected", "false");
     btn.addEventListener("click", () => {
       activeDay = d;
       renderTimetable();
@@ -163,9 +164,11 @@
   }
 
   function renderTimetable() {
-    dayTabsEl.querySelectorAll(".day-tab").forEach((b) =>
-      b.classList.toggle("is-active", Number(b.dataset.day) === activeDay)
-    );
+    dayTabsEl.querySelectorAll(".day-tab").forEach((b) => {
+      const active = Number(b.dataset.day) === activeDay;
+      b.classList.toggle("is-active", active);
+      b.setAttribute("aria-selected", String(active));
+    });
     typeChipsEl.querySelectorAll(".type-chip").forEach((b) =>
       b.classList.toggle("is-active", b.dataset.type === activeType)
     );
@@ -203,6 +206,116 @@
   }
 
   renderTimetable();
+
+  /* ---------- Live status rail: open/closed + next-class countdown ---------- */
+  const OPEN_AM = 5 * 60 + 30;   // 5:30 AM
+  const NOON = 12 * 60;          // 12:00 PM
+  const OPEN_PM = 15 * 60;       // 3:00 PM
+  const CLOSE_PM = 22 * 60;      // 10:00 PM
+
+  function parseTime(t) {
+    const [hm, ap] = t.split(" ");
+    let [h, m] = hm.split(":").map(Number);
+    if (ap === "PM" && h !== 12) h += 12;
+    if (ap === "AM" && h === 12) h = 0;
+    return h * 60 + m;
+  }
+
+  function gymStatus(now) {
+    const day = now.getDay();
+    if (day === 0) return { open: false, label: "CLOSED · OPENS MON 5:30 AM" };
+    const mins = now.getHours() * 60 + now.getMinutes();
+    if ((mins >= OPEN_AM && mins < NOON) || (mins >= OPEN_PM && mins < CLOSE_PM))
+      return { open: true, label: "OPEN NOW" };
+    if (mins < OPEN_AM) return { open: false, label: "OPENS TODAY 5:30 AM" };
+    if (mins >= NOON && mins < OPEN_PM) return { open: false, label: "OPENS TODAY 3:00 PM" };
+    return { open: false, label: "OPENS TOMORROW 5:30 AM" };
+  }
+
+  function nextClassFrom(now) {
+    const day = now.getDay();
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const todays = (SCHEDULE[day] || []).filter((c) => parseTime(c.time) > mins);
+    if (todays.length) return { cls: todays[0], inDays: 0, at: parseTime(todays[0].time) };
+    for (let i = 1; i <= 7; i++) {
+      const d = (day + i) % 7;
+      if ((SCHEDULE[d] || []).length) {
+        return { cls: SCHEDULE[d][0], inDays: i, at: parseTime(SCHEDULE[d][0].time) };
+      }
+    }
+    return null;
+  }
+
+  function renderStatus() {
+    const now = new Date();
+    const st = gymStatus(now);
+    const pill = document.getElementById("statusPill");
+    pill.classList.toggle("is-open", st.open);
+    pill.classList.toggle("is-closed", !st.open);
+    document.getElementById("statusText").textContent = st.label;
+
+    const nx = nextClassFrom(now);
+    const ncEl = document.getElementById("nextClass");
+    const cdEl = document.getElementById("countdown");
+    if (nx) {
+      ncEl.textContent = nx.cls.time + " · " + nx.cls.name;
+      const target = new Date(now);
+      target.setDate(target.getDate() + nx.inDays);
+      target.setHours(Math.floor(nx.at / 60), nx.at % 60, 0, 0);
+      const diff = Math.max(0, target - now);
+      const totalH = Math.floor(diff / 3.6e6);
+      const m = Math.floor((diff % 3.6e6) / 6e4);
+      const s = Math.floor((diff % 6e4) / 1000);
+      const pad = (n) => String(n).padStart(2, "0");
+      const dayPart = totalH >= 24 ? Math.floor(totalH / 24) + "d " : "";
+      cdEl.textContent = "in " + dayPart + pad(totalH % 24) + ":" + pad(m) + ":" + pad(s);
+    } else {
+      ncEl.textContent = "No classes scheduled";
+      cdEl.textContent = "";
+    }
+
+    const today = SCHEDULE[now.getDay()] || [];
+    document.getElementById("todayList").innerHTML = today.length
+      ? today.slice(0, 3).map((c) =>
+          '<li><strong>' + c.time + "</strong><span>" + c.name + "</span></li>"
+        ).join("")
+      : '<li><strong>Rest day</strong><span>See you Monday</span></li>';
+  }
+
+  renderStatus();
+  setInterval(renderStatus, 1000);
+
+  /* ---------- Count-up hero stats ---------- */
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const statEls = document.querySelectorAll(".hero__stats dt[data-count]");
+  const statObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        statObserver.unobserve(entry.target);
+        const el = entry.target;
+        const target = parseFloat(el.dataset.count);
+        const decimals = Number(el.dataset.decimals || 0);
+        if (reducedMotion) {
+          el.textContent = decimals ? target.toFixed(decimals) : target.toLocaleString("en-IN");
+          return;
+        }
+        const dur = 1400;
+        const t0 = performance.now();
+        (function tick(t) {
+          const p = Math.min(1, (t - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = target * eased;
+          el.textContent = decimals
+            ? val.toFixed(decimals)
+            : Math.round(val).toLocaleString("en-IN");
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    },
+    { threshold: 0.5 }
+  );
+  statEls.forEach((el) => statObserver.observe(el));
 
   /* ---------- Trial modal ---------- */
   const modal = document.getElementById("trialModal");

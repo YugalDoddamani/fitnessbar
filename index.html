@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0c0e'/%3E%3Cpath d='M20 44V20h6l8 14 8-14h6v24h-7V31l-7 13h-4l-7-13v13z' fill='%23c8ff00'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -56,7 +56,9 @@
       4.7 · 242 Google reviews</span>
     </p>
     <h1 class="hero__title reveal">
-      PANJIM'S <em>PREMIER</em> FITNESS,<br>RECOVERY &amp; <em>TRANSFORMATION</em> HUB
+      <span class="line">PANJIM'S PREMIER</span>
+      <span class="line">FITNESS, RECOVERY</span>
+      <span class="line">&amp; <em>TRANSFORMATION</em> HUB</span>
     </h1>
     <p class="hero__sub reveal">Premium strength training, group classes, and steam/sauna recovery — tailored to your lifestyle, in the heart of Panjim.</p>
     <div class="hero__ctas reveal">
@@ -64,12 +66,28 @@
       <a href="#schedule" class="btn btn--ghost btn--lg">View Class Schedule</a>
     </div>
     <dl class="hero__stats reveal">
-      <div><dt>6,500</dt><dd>sq ft training space</dd></div>
-      <div><dt>Precor&trade;</dt><dd>cardio &amp; strength deck</dd></div>
-      <div><dt>Les Mills&reg;</dt><dd>certified group classes</dd></div>
-      <div><dt>Steam +</dt><dd>Sauna recovery suite</dd></div>
+      <div><dt data-count="6500">0</dt><dd>sq ft training space</dd></div>
+      <div><dt data-count="4.7" data-decimals="1">0</dt><dd>Google rating</dd></div>
+      <div><dt data-count="242">0</dt><dd>Google reviews</dd></div>
+      <div><dt data-count="6">0</dt><dd>days open / week</dd></div>
     </dl>
-  </div>
+  <aside class="status-rail reveal" aria-label="Live gym status">
+    <div class="status-pill" id="statusPill">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">CHECKING…</span>
+    </div>
+    <div>
+      <span class="status-rail__label">Next class</span>
+      <span class="status-rail__value" id="nextClass">—</span>
+      <span class="status-rail__count" id="countdown">--:--:--</span>
+    </div>
+    <div>
+      <span class="status-rail__label">Today at Fitness Bar</span>
+      <ul class="status-rail__today" id="todayList"></ul>
+    </div>
+    <a class="btn btn--ghost btn--sm" href="tel:+918999174016">Call 89991 74016</a>
+  </aside>
+</div>
   <a href="#facilities" class="hero__scroll" aria-label="Scroll to facilities"><span></span></a>
 </section>
 
@@ -113,7 +131,7 @@
       <p class="kicker reveal">Facilities &amp; Features</p>
       <h2 class="h2 reveal">Everything you need. <em>Nothing you don't.</em></h2>
     </header>
-    <div class="grid-4">
+    <div class="grid-fac">
       <article class="card reveal">
         <div class="card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11"/></svg>
@@ -293,7 +311,7 @@
       <h2 class="h2 reveal">Transparent pricing. <em>No hidden traps.</em></h2>
       <p class="section__note reveal">Rates as listed on public directories — confirm with the gym before publishing.</p>
     </header>
-    <div class="grid-4 price-grid">
+    <div class="price-grid">
       <article class="price reveal">
         <h3>Day Pass</h3>
         <p class="price__amount">₹500<span>/day</span></p>
@@ -454,8 +472,10 @@
   </div>
   <div class="container footer__base">
     <p>© <span id="year"></span> Fitness Bar · Santa Inez, Panjim, Goa</p>
+    <p class="footer__credit">Designed and developed by <a href="https://yugaldoddamani.pages.dev" target="_blank" rel="noopener">Yugal Doddamani</a></p>
     <p class="footer__demo">Demo preview — replace demo content (schedule, transformations, prices) with live data before launch.</p>
   </div>
+  <div class="footer__mark" aria-hidden="true">FITNESS&nbsp;BAR</div>
 </footer>
 
 <!-- ===================== TRIAL MODAL ===================== -->
@@ -505,8 +525,12 @@
 <!-- ===================== WHATSAPP FLOAT ===================== -->
 <a class="wa-float" href="https://wa.me/918999174016?text=Hi%20Fitness%20Bar!%20I'd%20like%20to%20know%20more%20about%20memberships." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4.2-.4.6-1.3.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a12 12 0 0 0 4.7 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.2-.2-.2-.4-.3z"/></svg>
-  <span class="wa-float__pulse" aria-hidden="true"></span>
 </a>
+
+<!-- Mobile sticky CTA -->
+<div class="mobile-cta">
+  <button class="btn btn--lime btn--lg" data-open-modal>Claim Your Free 1-Day Trial</button>
+</div>
 
 <script src="script.js"></script>
 </body>
