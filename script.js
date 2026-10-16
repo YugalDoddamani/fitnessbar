@@ -24,16 +24,15 @@
     window.addEventListener("resize", () => { if (window.innerWidth > 720) closeMenu(); });
   }
 
-  // Reveal content as it enters the viewport, with a restrained stagger.
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealTargets = document.querySelectorAll(
-    ".hero-content > *, .intro-copy > *, .section-heading > *, .facility-card, .feature-content > *, .training-grid > *, .training-list article, .membership-grid > *, .visit-grid > *, .footer-main > *, .footer-bottom > *"
+    ".site-header .nav-wrap > *, .hero-content > *, .intro-copy > *, .intro-photo, .section-heading > *, .facility-card, .feature-content > *, .training-grid > div > *, .training-list article, .membership-grid > *, .visit-grid > div > *, .visit-photo, .footer-main > *, .footer-bottom > *"
   );
   if (!reduceMotion && "IntersectionObserver" in window) {
     document.documentElement.classList.add("js-motion");
     revealTargets.forEach((element, index) => {
       element.setAttribute("data-reveal", "");
-      element.style.setProperty("--reveal-delay", `${(index % 5) * 75}ms`);
+      element.style.setProperty("--reveal-delay", `${(index % 5) * 65}ms`);
     });
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -42,7 +41,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+    }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
     revealTargets.forEach(element => observer.observe(element));
   }
 })();
