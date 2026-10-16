@@ -132,3 +132,125 @@ figcaption span{color:#777}
 @media(max-width:720px){.container{width:calc(100% - 38px)}.section{padding:76px 0}.nav-wrap{height:74px}.brand{width:118px}.brand img{max-height:48px}.menu-toggle{display:flex;width:42px;height:42px;flex-direction:column;justify-content:center;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.4);margin-left:auto}.menu-toggle span{height:2px;width:18px;background:#fff;transition:transform .2s}.menu-toggle[aria-expanded=true] span:first-child{transform:translateY(4px) rotate(45deg)}.menu-toggle[aria-expanded=true] span:last-child{transform:translateY(-4px) rotate(-45deg)}.site-nav{display:none;position:fixed;inset:74px 0 auto;background:#111;padding:20px 22px 26px;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line)}.site-nav.is-open{display:flex}.site-nav a{font-size:.85rem;padding:15px 0;border-bottom:1px solid var(--line)}.site-nav a:last-child{border:0}.nav-cta{padding:11px 12px;font-size:.62rem;gap:8px}.hero{min-height:760px;min-height:100svh;align-items:flex-end}.hero-image{object-position:58% center}.hero-shade{background:linear-gradient(0deg,rgba(0,0,0,.9),rgba(0,0,0,.58) 55%,rgba(0,0,0,.28))}.hero-content{padding-top:140px;padding-bottom:35px}.hero h1{font-size:clamp(4.6rem,18vw,7.5rem)}.hero-copy{font-size:.9rem;max-width:360px;margin:24px 0}.hero-foot{margin-top:52px;gap:9px;font-size:.52rem;letter-spacing:.1em;flex-wrap:wrap}.hero-index{right:19px;bottom:18px}.intro-grid{grid-template-columns:1fr;gap:30px}.intro-grid>.section-label{margin-bottom:12px}.intro-copy h2{font-size:clamp(3.4rem,13vw,5.2rem)}.intro-photo{grid-column:auto;margin-top:8px}.intro-photo img{height:290px}.section-heading{display:block;margin-bottom:34px}.section-heading h2{font-size:clamp(3.4rem,13vw,5.4rem)}.section-summary{margin-top:24px}.facility-grid{gap:10px}.facility-card{min-height:310px;padding:18px}.facility-card h3{font-size:1.9rem}.facility-overlay{padding:20px 16px}.facility-overlay h3{font-size:2rem}.facility-overlay p,.facility-card p{font-size:.72rem}.facility-icon{width:32px;height:32px}.card-kicker{font-size:.53rem!important}.card-link{font-size:.65rem}.feature-band{height:500px}.feature-content h2{font-size:clamp(4rem,15vw,6.5rem)}.training-grid{grid-template-columns:1fr;gap:38px}.training .section-label{margin-bottom:42px}.training h2{font-size:clamp(3.4rem,13vw,5.5rem)}.training-list article{padding:20px 0}.membership-grid{grid-template-columns:1fr;gap:38px}.section-label--light{margin-bottom:42px}.membership h2{font-size:clamp(4.4rem,17vw,7rem)}.membership-note{min-height:300px}.visit-grid{grid-template-columns:1fr;gap:38px}.visit .section-label{margin-bottom:42px}.visit h2{font-size:clamp(3.6rem,13vw,5.8rem)}.hours{grid-template-columns:68px 1fr 1fr;gap:10px;font-size:.68rem}.hours p:nth-of-type(2){grid-column:auto}.hours small{grid-column:2/-1}.visit-photo img{height:310px}.footer-main{align-items:flex-start;flex-wrap:wrap}.footer-main>p{font-size:2.2rem;text-align:right;margin-left:auto}.footer-top{width:100%;border-top:1px solid var(--line);padding-top:18px}.footer-bottom{font-size:.6rem}.footer-bottom>span:nth-child(2){display:none}}
 @media(max-width:390px){.nav-cta{font-size:0;padding:12px}.nav-cta span{font-size:1rem}.facility-grid{grid-template-columns:1fr}.facility-card{min-height:330px}.hours{grid-template-columns:1fr 1fr}.hours>span{grid-column:1/-1}.hours p:nth-of-type(2){grid-column:2}.hours small{grid-column:1/-1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+
+/* ==========================================================
+   REFINEMENT PASS — broader typography, glass navigation,
+   scroll reveals and layered section transitions
+   ========================================================== */
+:root {
+  --display: "Barlow", "Arial Narrow", sans-serif;
+  --nav-glass: rgba(17, 17, 17, .78);
+}
+h1,h2,h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  text-shadow: none;
+}
+h1 { letter-spacing: -.035em; }
+h2 { letter-spacing: -.03em; }
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--nav-glass);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(18px) saturate(125%);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  transition: background .25s ease, border-color .25s ease;
+}
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  pointer-events: none;
+}
+.nav-wrap { height: 78px; }
+html { scroll-padding-top: 78px; }
+.hero-content { padding-top: 150px; }
+.hero h1 span { text-shadow: none; color: var(--red); }
+.hero h1 { max-width: 820px; }
+.site-nav a { transition: color .2s ease; }
+.site-nav a:hover { color: #fff; }
+.menu-toggle { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+@media (max-width:720px) {
+  .nav-wrap { height: 70px; }
+  .site-nav { top: 70px; background: rgba(17,17,17,.94); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+  .hero-content { padding-top: 135px; }
+  html { scroll-padding-top: 70px; }
+}
+
+/* The major panels overlap in document order, like stacked editorial pages. */
+.stacked-content { isolation: isolate; }
+.stacked-content > .intro,
+.stacked-content > .facilities,
+.stacked-content > .feature-band,
+.stacked-content > .training,
+.stacked-content > .membership,
+.stacked-content > .visit {
+  position: relative;
+  isolation: isolate;
+}
+.stacked-content > .intro { z-index: 1; }
+.stacked-content > .facilities { z-index: 2; }
+.stacked-content > .feature-band { z-index: 3; }
+.stacked-content > .training { z-index: 4; }
+.stacked-content > .membership { z-index: 5; }
+.stacked-content > .visit { z-index: 6; }
+
+/* Use sticky section panels on tall screens, but retain normal flow on small
+   screens and when reduced motion is requested. Each next panel covers the
+   previous panel as it enters the viewport. */
+@media (min-width: 900px) and (min-height: 650px) {
+  .stacked-content > .intro,
+  .stacked-content > .facilities,
+  .stacked-content > .feature-band,
+  .stacked-content > .training,
+  .stacked-content > .membership,
+  .stacked-content > .visit {
+    position: sticky;
+    top: 0;
+  }
+  .stacked-content > .feature-band {
+    min-height: 78svh;
+  }
+}
+
+/* Scroll-triggered reveals are progressive enhancement; content remains
+   visible when JavaScript is unavailable. */
+.js-motion [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js-motion [data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0,0,0);
+}
+.js-motion .hero-content [data-reveal] {
+  transform: translate3d(0, 16px, 0);
+}
+.js-motion .hero-content [data-reveal].is-visible { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js-motion [data-reveal],
+  .js-motion [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .stacked-content > .intro,
+  .stacked-content > .facilities,
+  .stacked-content > .feature-band,
+  .stacked-content > .training,
+  .stacked-content > .membership,
+  .stacked-content > .visit {
+    position: relative;
+    top: auto;
+  }
+}
