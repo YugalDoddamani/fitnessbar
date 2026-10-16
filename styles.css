@@ -254,3 +254,27 @@ html { scroll-padding-top: 78px; }
     top: auto;
   }
 }
+
+
+/* Footer attribution */
+.footer-bottom .site-credit {
+  color: #9c9a97;
+}
+.footer-bottom .site-credit a {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.35);
+  text-underline-offset: 3px;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+.footer-bottom .site-credit a:hover {
+  color: #f06a6e;
+  text-decoration-color: currentColor;
+}
+@media (max-width: 720px) {
+  .footer-bottom .site-credit {
+    width: 100%;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+}
