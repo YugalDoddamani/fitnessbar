@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Bar — Best Gym in Panjim, Goa | Strength, Classes, Steam &amp; Sauna</title>
+<meta name="description" content="Fitness Bar, Santa Inez, Panjim — Goa's premium fitness, recovery & transformation hub. Strength training, Yoga, Zumba, Les Mills, MMA, steam & sauna. Claim your free 1-day trial.">
+<meta name="keywords" content="gym in Panjim, best gym Panjim, MMA gym Panjim, personal trainer Goa, zumba classes Panjim, fitness bar Goa">
+<meta property="og:title" content="Fitness Bar — Panjim's Premier Fitness, Recovery & Transformation Hub">
+<meta property="og:description" content="Premium strength training, group classes and steam/sauna recovery in Santa Inez, Panjim. Claim your free 1-day trial.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero-gym.jpg">
+<meta name="theme-color" content="#0c0c0e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0c0e'/%3E%3Cpath d='M20 44V20h6l8 14 8-14h6v24h-7V31l-7 13h-4l-7-13v13z' fill='%23c8ff00'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav__inner container">
+    <a href="#top" class="brand" aria-label="Fitness Bar home">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="30" height="30"><path d="M14 50V14h7l10 20 10-20h7v36h-8V30l-9 17h-4l-9-17v20z" fill="#c8ff00"/><path d="M8 22h6v20H8zM50 22h6v20h-6z" fill="#c8ff00" opacity=".55"/></svg>
+      </span>
+      <span class="brand__text">FITNESS<span>BAR</span></span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#facilities">Facilities</a>
+      <a href="#schedule">Class Schedule</a>
+      <a href="#results">Transformations</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#location">Location</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="btn btn--lime btn--sm" data-open-modal>Claim Free Trial</button>
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero__bg" role="img" aria-label="Athlete training in a dark, neon-lit gym">
+    <img src="assets/hero-gym.jpg" alt="" fetchpriority="high" onerror="this.remove()">
+    <div class="hero__scrim"></div>
+  </div>
+  <div class="container hero__inner">
+    <p class="hero__eyebrow reveal">Santa Inez, Panjim &nbsp;·&nbsp; <span class="hero__rating">
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z" fill="#c8ff00"/></svg>
+      4.7 · 242 Google reviews</span>
+    </p>
+    <h1 class="hero__title reveal">
+      <span class="line">PANJIM'S PREMIER</span>
+      <span class="line">FITNESS, RECOVERY</span>
+      <span class="line">&amp; <em>TRANSFORMATION</em> HUB</span>
+    </h1>
+    <p class="hero__sub reveal">Premium strength training, group classes, and steam/sauna recovery — tailored to your lifestyle, in the heart of Panjim.</p>
+    <div class="hero__ctas reveal">
+      <button class="btn btn--lime btn--lg" data-open-modal>Claim Your Free 1-Day Trial</button>
+      <a href="#schedule" class="btn btn--ghost btn--lg">View Class Schedule</a>
+    </div>
+    <dl class="hero__stats reveal">
+      <div><dt data-count="6500">0</dt><dd>sq ft training space</dd></div>
+      <div><dt data-count="4.7" data-decimals="1">0</dt><dd>Google rating</dd></div>
+      <div><dt data-count="242">0</dt><dd>Google reviews</dd></div>
+      <div><dt data-count="6">0</dt><dd>days open / week</dd></div>
+    </dl>
+  <aside class="status-rail reveal" aria-label="Live gym status">
+    <div class="status-pill" id="statusPill">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">CHECKING…</span>
+    </div>
+    <div>
+      <span class="status-rail__label">Next class</span>
+      <span class="status-rail__value" id="nextClass">—</span>
+      <span class="status-rail__count" id="countdown">--:--:--</span>
+    </div>
+    <div>
+      <span class="status-rail__label">Today at Fitness Bar</span>
+      <ul class="status-rail__today" id="todayList"></ul>
+    </div>
+    <a class="btn btn--ghost btn--sm" href="tel:+918999174016">Call 89991 74016</a>
+  </aside>
+</div>
+  <a href="#facilities" class="hero__scroll" aria-label="Scroll to facilities"><span></span></a>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>STRENGTH</span><i>✦</i><span>YOGA</span><i>✦</i><span>ZUMBA</span><i>✦</i><span>LES MILLS</span><i>✦</i><span>MMA</span><i>✦</i><span>STEAM &amp; SAUNA</span><i>✦</i><span>PERSONAL TRAINING</span><i>✦</i>
+    <span>STRENGTH</span><i>✦</i><span>YOGA</span><i>✦</i><span>ZUMBA</span><i>✦</i><span>LES MILLS</span><i>✦</i><span>MMA</span><i>✦</i><span>STEAM &amp; SAUNA</span><i>✦</i><span>PERSONAL TRAINING</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section about" id="about">
+  <div class="container about__grid">
+    <div class="about__media reveal">
+      <img src="assets/strength-zone.jpg" alt="Fitness Bar strength training zone with neon lime lighting" loading="lazy" onerror="this.remove()">
+      <span class="tag tag--lime">NOT YOUR TYPICAL GYM</span>
+    </div>
+    <div class="about__copy">
+      <p class="kicker reveal">Why Fitness Bar</p>
+      <h2 class="h2 reveal">A 6,500 sq ft <em>new-age</em> fitness destination.</h2>
+      <p class="lead reveal">More than a gym — a holistic health &amp; wellness hub designed for every goal, from first-timers to competitive athletes. State-of-the-art Precor equipment, a dedicated CrossFit zone, a DJ cabin with videotheque screens, and energy that keeps you coming back.</p>
+      <ul class="checklist reveal">
+        <li>Best-in-Goa equipment, spotless floors, zero chaos</li>
+        <li>Certified trainers who correct form, not just count reps</li>
+        <li>Members from teens to 75+ — truly open for all</li>
+        <li>Central Panjim location, opposite Panjim Gymkhana</li>
+      </ul>
+      <div class="about__cta reveal">
+        <button class="btn btn--lime" data-open-modal>Start With a Free Day</button>
+        <a class="link-arrow" href="#schedule">See the timetable <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FACILITIES ===================== -->
+<section class="section" id="facilities">
+  <div class="container">
+    <header class="section__head">
+      <p class="kicker reveal">Facilities &amp; Features</p>
+      <h2 class="h2 reveal">Everything you need. <em>Nothing you don't.</em></h2>
+    </header>
+    <div class="grid-fac">
+      <article class="card reveal">
+        <div class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11"/></svg>
+        </div>
+        <h3>Strength &amp; Cardio Zone</h3>
+        <p>State-of-the-art Precor equipment for every level — free weights, stations, treadmills, bikes and a dedicated CrossFit area.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </div>
+        <h3>Group Classes</h3>
+        <p>Zumba, Yoga, Les Mills BodyPump &amp; GRIT, and MMA sessions — energy, music and a community that shows up.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17c2-1.5 2-3 0-4.5M9 17c2-1.5 2-3 0-4.5M14 17c2-1.5 2-3 0-4.5M19 17c2-1.5 2-3 0-4.5M3 21h18"/></svg>
+        </div>
+        <h3>Recovery Suite</h3>
+        <p>Dedicated steam bath &amp; sauna to unwind, flush soreness and recover faster between sessions.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+        </div>
+        <h3>Personalized Coaching</h3>
+        <p>Certified trainers build targeted plans for weight loss, muscle gain and nutrition — with real form correction.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RECOVERY BANNER ===================== -->
+<section class="recovery-band">
+  <div class="recovery-band__bg" role="img" aria-label="Steam room and sauna recovery suite">
+    <img src="assets/recovery-suite.jpg" alt="" loading="lazy" onerror="this.remove()">
+    <div class="recovery-band__scrim"></div>
+  </div>
+  <div class="container recovery-band__inner reveal">
+    <p class="kicker">The Recovery Suite</p>
+    <h2 class="h2">Train hard.<br><em>Recover harder.</em></h2>
+    <p class="lead">Dedicated steam bath &amp; sauna to flush soreness and finish every session right — included in Annual VIP.</p>
+    <button class="btn btn--lime" data-open-modal>Experience It Free</button>
+  </div>
+</section>
+
+<!-- ===================== SCHEDULE ===================== -->
+<section class="section section--alt" id="schedule">
+  <div class="container">
+    <header class="section__head">
+      <div>
+        <p class="kicker reveal">Group Fitness Timetable</p>
+        <h2 class="h2 reveal">Train on <em>your</em> schedule.</h2>
+      </div>
+      <p class="section__note reveal">Demo timetable — swap in Fitness Bar's live schedule. <span class="tag">DEMO DATA</span></p>
+    </header>
+
+    <div class="timetable reveal">
+      <div class="timetable__controls">
+        <div class="day-tabs" role="tablist" aria-label="Day of week" id="dayTabs"></div>
+        <div class="type-chips" id="typeChips" role="group" aria-label="Filter by class type"></div>
+      </div>
+      <div class="timetable__list" id="classList" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RESULTS / SOCIAL PROOF ===================== -->
+<section class="section" id="results">
+  <div class="container">
+    <header class="section__head">
+      <p class="kicker reveal">Transformations &amp; Social Proof</p>
+      <h2 class="h2 reveal">Real people. Real <em>results.</em></h2>
+    </header>
+
+    <!-- Demo placeholders — replace with real client photos (with consent) -->
+    <div class="grid-3 trans-grid">
+      <article class="trans-card reveal" data-demo>
+        <div class="trans-card__img" style="--g1:#2a2d00; --g2:#c8ff00;">
+          <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11" stroke="#c8ff00" stroke-width="1.6" fill="none"/></svg>
+          <span class="trans-card__ba">BEFORE / AFTER</span>
+        </div>
+        <div class="trans-card__body">
+          <strong>Rohan S.</strong>
+          <p>Fat loss · 14 weeks</p>
+        </div>
+      </article>
+      <article class="trans-card reveal" data-demo>
+        <div class="trans-card__img" style="--g1:#241a00; --g2:#ff8a00;">
+          <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11" stroke="#ff8a00" stroke-width="1.6" fill="none"/></svg>
+          <span class="trans-card__ba">BEFORE / AFTER</span>
+        </div>
+        <div class="trans-card__body">
+          <strong>Priya M.</strong>
+          <p>Strength &amp; tone · 12 weeks</p>
+        </div>
+      </article>
+      <article class="trans-card reveal" data-demo>
+        <div class="trans-card__img" style="--g1:#00211d; --g2:#00e0a4;">
+          <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11" stroke="#00e0a4" stroke-width="1.6" fill="none"/></svg>
+          <span class="trans-card__ba">BEFORE / AFTER</span>
+        </div>
+        <div class="trans-card__body">
+          <strong>Arjun D.</strong>
+          <p>Muscle gain · 16 weeks</p>
+        </div>
+      </article>
+      <article class="trans-card reveal" data-demo>
+        <div class="trans-card__img" style="--g1:#1d002b; --g2:#c26bff;">
+          <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11" stroke="#c26bff" stroke-width="1.6" fill="none"/></svg>
+          <span class="trans-card__ba">BEFORE / AFTER</span>
+        </div>
+        <div class="trans-card__body">
+          <strong>Sneha K.</strong>
+          <p>Weight management · 10 weeks</p>
+        </div>
+      </article>
+      <article class="trans-card reveal" data-demo>
+        <div class="trans-card__img" style="--g1:#2b0a00; --g2:#ff4d2e;">
+          <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11" stroke="#ff4d2e" stroke-width="1.6" fill="none"/></svg>
+          <span class="trans-card__ba">BEFORE / AFTER</span>
+        </div>
+        <div class="trans-card__body">
+          <strong>Vikram R.</strong>
+          <p>MMA conditioning · 8 weeks</p>
+        </div>
+      </article>
+      <article class="trans-card reveal" data-demo>
+        <div class="trans-card__img" style="--g1:#001c33; --g2:#38b6ff;">
+          <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M6.5 6.5v11m11-11v11M3 9v6m18-6v6M6.5 12h11" stroke="#38b6ff" stroke-width="1.6" fill="none"/></svg>
+          <span class="trans-card__ba">BEFORE / AFTER</span>
+        </div>
+        <div class="trans-card__body">
+          <strong>Aisha L.</strong>
+          <p>Yoga &amp; mobility · 12 weeks</p>
+        </div>
+      </article>
+    </div>
+    <p class="placeholder-note reveal">▸ Placeholder cards — drop real, consented client photos into <code>.trans-card__img</code>.</p>
+
+    <div class="proof reveal">
+      <div class="proof__score">
+        <span class="proof__number">4.7</span>
+        <div class="proof__stars" aria-label="4.7 out of 5 stars">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z" fill="#c8ff00"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z" fill="#c8ff00"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z" fill="#c8ff00"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z" fill="#c8ff00"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z" fill="#3a3a40"/></svg>
+        </div>
+        <span class="proof__meta">242 Google reviews</span>
+        <a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/Fitness+Bar+Panjim" target="_blank" rel="noopener">Read all reviews</a>
+      </div>
+      <div class="proof__cards">
+        <figure class="review-card reveal">
+          <blockquote>"Undeniably the best workout space in town, with quality equipment and staff."</blockquote>
+          <figcaption><span class="avatar">MR</span> Member · Google review</figcaption>
+        </figure>
+        <figure class="review-card reveal">
+          <blockquote>"Coach Tariq provides custom workouts and diet plans according to your goals. Highly recommended for all skill levels."</blockquote>
+          <figcaption><span class="avatar">MK</span> Personal training client · Google review</figcaption>
+        </figure>
+        <figure class="review-card reveal">
+          <blockquote>"Great workout place with best of equipment, very good trainers. Spacious gym with a positive vibe."</blockquote>
+          <figcaption><span class="avatar">VK</span> Local Guide · Google review</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING ===================== -->
+<section class="section section--alt" id="pricing">
+  <div class="container">
+    <header class="section__head">
+      <p class="kicker reveal">Membership &amp; Pricing</p>
+      <h2 class="h2 reveal">Transparent pricing. <em>No hidden traps.</em></h2>
+      <p class="section__note reveal">Rates as listed on public directories — confirm with the gym before publishing.</p>
+    </header>
+    <div class="price-grid">
+      <article class="price reveal">
+        <h3>Day Pass</h3>
+        <p class="price__amount">₹500<span>/day</span></p>
+        <ul>
+          <li>Full-day gym access</li>
+          <li>All strength &amp; cardio zones</li>
+          <li>Great for visitors &amp; try-outs</li>
+        </ul>
+        <button class="btn btn--ghost" data-open-modal>Book a Day Pass</button>
+      </article>
+      <article class="price reveal">
+        <h3>Monthly</h3>
+        <p class="price__amount">₹4,500<span>/month</span></p>
+        <ul>
+          <li>Everything in Day Pass</li>
+          <li>Group classes included</li>
+          <li>Shower &amp; locker access</li>
+        </ul>
+        <button class="btn btn--ghost" data-open-modal>Start Monthly</button>
+      </article>
+      <article class="price price--featured reveal">
+        <span class="price__badge">BEST VALUE</span>
+        <h3>Annual VIP</h3>
+        <p class="price__amount">₹24,000<span>/year</span></p>
+        <ul>
+          <li>Full access, all zones &amp; classes</li>
+          <li><strong>Steam &amp; sauna included</strong></li>
+          <li>Priority booking on PT slots</li>
+          <li>2 months free vs. monthly</li>
+        </ul>
+        <button class="btn btn--lime" data-open-modal>Go Annual VIP</button>
+      </article>
+      <article class="price price--pt reveal">
+        <h3>Personal Training</h3>
+        <p class="price__amount">Custom</p>
+        <ul>
+          <li>1-on-1 certified coaches</li>
+          <li>Weight loss &amp; muscle gain plans</li>
+          <li>Custom diet &amp; form correction</li>
+        </ul>
+        <button class="btn btn--lime" data-open-modal>Get a PT Plan</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LEAD CAPTURE ===================== -->
+<section class="section" id="join">
+  <div class="container lead">
+    <div class="lead__copy">
+      <p class="kicker reveal">Your First Day Is On Us</p>
+      <h2 class="h2 reveal">Claim your <em>free 1-day trial.</em></h2>
+      <p class="lead reveal">No commitment, no sales pressure. Drop your details and we'll hold a spot for you — or message us on WhatsApp any time.</p>
+      <ul class="checklist reveal">
+        <li>Replies within gym hours (5:30 AM–10 PM, Mon–Sat)</li>
+        <li>Trainers call back to match you to the right class</li>
+        <li>Bring a friend — both train free on your trial day</li>
+      </ul>
+      <p class="lead__alt reveal">Prefer to chat? <a href="https://wa.me/918999174016?text=Hi%20Fitness%20Bar!%20I'd%20like%20to%20claim%20my%20free%201-day%20trial." target="_blank" rel="noopener">Message us on WhatsApp →</a></p>
+    </div>
+    <form class="lead__form reveal" id="leadForm" novalidate>
+      <h3>Start your trial</h3>
+      <label>Full name
+        <input type="text" name="name" placeholder="e.g. Aisha Menezes" required autocomplete="name">
+      </label>
+      <label>Phone number
+        <input type="tel" name="phone" placeholder="98765 43210" pattern="[0-9+\s-]{10,14}" required autocomplete="tel">
+      </label>
+      <label>Preferred class
+        <select name="class" required>
+          <option value="" disabled selected>Choose one…</option>
+          <option>Strength &amp; Conditioning</option>
+          <option>Yoga</option>
+          <option>Zumba</option>
+          <option>Les Mills (BodyPump / GRIT)</option>
+          <option>MMA / Kickboxing</option>
+          <option>Personal Training</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+      <label>My goal
+        <select name="goal">
+          <option value="" disabled selected>What's your focus? (optional)</option>
+          <option>Weight loss</option>
+          <option>Muscle gain</option>
+          <option>Strength &amp; conditioning</option>
+          <option>Flexibility &amp; mobility</option>
+          <option>General fitness</option>
+        </select>
+      </label>
+      <button type="submit" class="btn btn--lime btn--lg btn--block">Claim My Free Day</button>
+      <p class="form__hint">Demo only — connect this form to WhatsApp Business / email to capture real leads.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== LOCATION ===================== -->
+<section class="section section--alt" id="location">
+  <div class="container location">
+    <div class="location__info">
+      <p class="kicker reveal">Find Us</p>
+      <h2 class="h2 reveal">Santa Inez, <em>Panjim.</em></h2>
+      <address class="reveal">
+        <strong>Fitness Bar</strong><br>
+        2nd Floor, Esmeralda Casa Da Povo,<br>
+        St Inez Rd, Santa Inez, Panjim,<br>
+        Goa 403002 · Opposite Panjim Gymkhana
+      </address>
+      <div class="hours reveal">
+        <h4>Hours</h4>
+        <ul>
+          <li><span>Mon – Sat</span><span>5:30 AM – 12 PM · 3 – 10 PM</span></li>
+          <li><span>Sunday</span><span>Closed</span></li>
+        </ul>
+      </div>
+      <div class="location__contact reveal">
+        <a class="btn btn--lime" href="tel:+918999174016">Call 89991 74016</a>
+        <a class="btn btn--ghost" href="https://maps.app.goo.gl/K59tEs639pxZ3Em96" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </div>
+    <div class="location__map reveal">
+      <iframe title="Map — Fitness Bar, Santa Inez, Panjim"
+        src="https://www.google.com/maps?q=Fitness+Bar,+St+Inez+Rd,+Panjim,+Goa&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <a href="#top" class="brand brand--footer">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="26" height="26"><path d="M14 50V14h7l10 20 10-20h7v36h-8V30l-9 17h-4l-9-17v20z" fill="#c8ff00"/><path d="M8 22h6v20H8zM50 22h6v20h-6z" fill="#c8ff00" opacity=".55"/></svg>
+        </span>
+        <span class="brand__text">FITNESS<span>BAR</span></span>
+      </a>
+      <p>Panjim's premier fitness, recovery &amp; transformation hub. Strength, classes, steam &amp; sauna — all under one roof.</p>
+    </div>
+    <nav aria-label="Footer">
+      <h4>Explore</h4>
+      <a href="#facilities">Facilities</a>
+      <a href="#schedule">Class Schedule</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#join">Free Trial</a>
+    </nav>
+    <div>
+      <h4>Contact</h4>
+      <a href="tel:+918999174016">+91 89991 74016</a>
+      <a href="mailto:fnlalvares@gmail.com">fnlalvares@gmail.com</a>
+      <a href="https://www.facebook.com/FitnessBarPanjim/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <p>Mon–Sat: 5:30 AM–12 PM, 3–10 PM<br>Sunday: Closed</p>
+    </div>
+  </div>
+  <div class="container footer__base">
+    <p>© <span id="year"></span> Fitness Bar · Santa Inez, Panjim, Goa</p>
+    <p class="footer__credit">Designed and developed by <a href="https://yugaldoddamani.pages.dev" target="_blank" rel="noopener">Yugal Doddamani</a></p>
+    <p class="footer__demo">Demo preview — replace demo content (schedule, transformations, prices) with live data before launch.</p>
+  </div>
+  <div class="footer__mark" aria-hidden="true">FITNESS&nbsp;BAR</div>
+</footer>
+
+<!-- ===================== TRIAL MODAL ===================== -->
+<div class="modal" id="trialModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal__scrim" data-close-modal></div>
+  <div class="modal__card">
+    <button class="modal__close" data-close-modal aria-label="Close">×</button>
+    <h3 id="modalTitle">Claim your <em>free 1-day trial</em></h3>
+    <p class="modal__sub">We'll call back within gym hours to lock in your spot.</p>
+    <form id="modalForm" novalidate>
+      <label>Full name
+        <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+      </label>
+      <label>Phone number
+        <input type="tel" name="phone" placeholder="98765 43210" pattern="[0-9+\s-]{10,14}" required autocomplete="tel">
+      </label>
+      <label>Preferred class
+        <select name="class" required>
+          <option value="" disabled selected>Choose one…</option>
+          <option>Strength &amp; Conditioning</option>
+          <option>Yoga</option>
+          <option>Zumba</option>
+          <option>Les Mills (BodyPump / GRIT)</option>
+          <option>MMA / Kickboxing</option>
+          <option>Personal Training</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+      <label>My goal
+        <select name="goal">
+          <option value="" disabled selected>What's your focus? (optional)</option>
+          <option>Weight loss</option>
+          <option>Muscle gain</option>
+          <option>Strength &amp; conditioning</option>
+          <option>Flexibility &amp; mobility</option>
+          <option>General fitness</option>
+        </select>
+      </label>
+      <button type="submit" class="btn btn--lime btn--lg btn--block">Claim My Free Day</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===================== WHATSAPP FLOAT ===================== -->
+<a class="wa-float" href="https://wa.me/918999174016?text=Hi%20Fitness%20Bar!%20I'd%20like%20to%20know%20more%20about%20memberships." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4.2-.4.6-1.3.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a12 12 0 0 0 4.7 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.2-.2-.2-.4-.3z"/></svg>
+</a>
+
+<!-- Mobile sticky CTA -->
+<div class="mobile-cta">
+  <button class="btn btn--lime btn--lg" data-open-modal>Claim Your Free 1-Day Trial</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
